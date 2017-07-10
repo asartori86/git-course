@@ -52,9 +52,9 @@ not need a centralized server to host the repository.
 	cd planets
 	git init
 	ls -a
-
-	git status
-
+```
+git status
+```
 ```
 On branch master
 
