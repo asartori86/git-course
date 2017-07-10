@@ -52,6 +52,13 @@ not need a centralized server to host the repository.
 	cd planets
 	git init
 	ls -a
-	
+
 	git status
-	
+
+```
+On branch master
+
+Initial commit
+
+nothing to commit (create/copy files and use "git add" to track)
+```
