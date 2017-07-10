@@ -62,3 +62,48 @@ Initial commit
 
 nothing to commit (create/copy files and use "git add" to track)
 ```
+
+Let's create a new a file and see what happens
+
+```
+echo 'Cold and dry' > mars.txt
+```
+```
+$ git status
+On branch master
+
+Initial commit
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	mars.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+```
+$ git add mars.txt 
+$ git status
+On branch master
+
+Initial commit
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+	new file:   mars.txt
+```
+```
+git commit
+...
+[master (root-commit) 2d88073] added mars.txt file
+ 1 file changed, 2 insertions(+)
+ create mode 100644 mars.txt
+```
+
+	echo 'another line' >> mars.txt
+	git status
+	git diff
+	git add mars.txt
+	git commit -m "another line"
+	git status
+	git log
