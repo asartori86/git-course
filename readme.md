@@ -1,12 +1,16 @@
+
+
 # Version control with git
 
+[Why git?](http://phdcomics.com/comics/archive.php?comicid=1531)
+
 A version control system is a tool that keeps track of `changes` for
-us and help us version and `merge` our files. Changes are stored in a
-`commit`. The complete history of commits for a particular projects
-and their metadata make up a `repository`. Repositories can be kept in
+us and help us version and `merge` our files. Changes are stored in
+`commit`s. The complete history of `commit`s for a particular project
+and their metadata make up a **repository**. Repositories can be kept in
 sync across different computers.
 
-Git is a `distributed` version control system, meaning that they do
+Git is a **distributed** version control system, meaning that they do
 not need a centralized server to host the repository.
 
 ### Take home messages
@@ -29,46 +33,50 @@ not need a centralized server to host the repository.
 
 ## Setting up git
 
-	git config --global user.name "Alberto Sartori"
-	git config --global user.email "alberto.sartori86@gmail.com"
-	git config --global core.editor "emacs -nw -Q"
-	git config --global core.editor "vim"
-	
-	git config --list
+```bash
+$ git config --global user.name "Alberto Sartori"
+$ git config --global user.email "alberto.sartori86@gmail.com"
+$ git config --global core.editor "emacs -nw -Q"
+$ git config --global core.editor "vim"
 
-	cat ~/.gitconfig
+$ git config --list
+
+$ cat ~/.gitconfig
+```
 
 ### RTFM
 
-	man git
-	git config -h
-	git config --help
-	man git-config
+```bash
+$ man git
+$ git config -h
+$ git config --help
+$ man git-config
+```
 
+Or take a look at [software carpentry lecture](http://swcarpentry.github.io/git-novice/) and [pro git book](https://git-scm.com/book/en/v2) 
 
 ## First steps with git
 
-	mkdir planets
-	cd planets
-	git init
-	ls -a
+```bash
+$ mkdir planets
+$ cd planets
+$ git init
+$ ls -a
 ```
-git status
-```
-```
+```bash
+$ git status
 On branch master
 
 Initial commit
 
 nothing to commit (create/copy files and use "git add" to track)
 ```
-
 Let's create a new a file and see what happens
 
+```bash
+$ echo 'Cold and dry' > mars.txt
 ```
-echo 'Cold and dry' > mars.txt
-```
-```
+```bash
 $ git status
 On branch master
 
@@ -81,29 +89,115 @@ Untracked files:
 
 nothing added to commit but untracked files present (use "git add" to track)
 ```
+```bash
 $ git add mars.txt 
 $ git status
+
 On branch master
 
 Initial commit
 
 Changes to be committed:
+
   (use "git rm --cached <file>..." to unstage)
 
-	new file:   mars.txt
-```
-```
-git commit
-...
-[master (root-commit) 2d88073] added mars.txt file
- 1 file changed, 2 insertions(+)
- create mode 100644 mars.txt
+new file:   mars.txt
+
 ```
 
-	echo 'another line' >> mars.txt
-	git status
-	git diff
-	git add mars.txt
-	git commit -m "another line"
-	git status
-	git log
+```bash
+$ git commit
+
+...
+
+[master (root-commit) 2d88073] added mars.txt file
+
+ 1 file changed, 2 insertions(+)
+
+ create mode 100644 mars.txt
+
+```
+
+```bash
+
+$ echo 'another line' >> mars.txt
+$ git status
+$ git diff
+$ git add mars.txt
+$ git commit -m "another line"
+$ git status
+$ git log
+
+```
+
+## Branching
+
+Create a new branch
+
+```bash
+$ git branch branch_name
+```
+
+Move the `HEAD` on branch `branch_name`
+
+```bash
+$ git checkout branch_name
+```
+
+The two above steps can be done
+
+```bash
+$ git checkout -b branch_name
+```
+
+Do the usual steps in this branch. Once satisfied, let's `merge` this branch into the `master` branch:
+
+First of all, move the `HEAD` on the `master` branch
+
+```bash
+$ git checkout master
+```
+
+Now `merge` the other one
+
+```bash
+$ git merge branch_name
+```
+
+## Remotes
+
+You can always add one or more remotes to your **local** repository
+
+```bash
+$ git remote add custom_label remote_git_repository_address
+```
+
+To retrieve, `fetch` updates from a `remote` named `custom_label`
+
+```bash
+$ git fetch custom_label
+```
+
+The above command downloads **in your `.git` folder** new commits and new branches
+
+To apply these changes, you should `merge` the **remote** branch you want. For example, if I want to apply to my local `master` branch the changes made on the remote `master` branch, I have to do
+
+```bash
+$ git checkout master
+$ git merge custom_label/master
+```
+
+When you `clone` a remote git repository, the remote as **by default** the label `origin`
+
+If you have write access to a remote repository `custom_label`, you can `push` your branch `branch_name` as follows
+
+```bash
+$ git push custom_label branch_name
+```
+
+
+
+
+
+
+
